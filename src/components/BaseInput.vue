@@ -49,7 +49,7 @@ export default {
     font-size: 16px;
     font-weight: 500;
     outline: 0;
-    color: #1a1a1a;
+    color: var(--input-color);
 }
 
 .base-input__label {
@@ -57,8 +57,8 @@ export default {
     top: 8px;
     left: 16px;
     padding: 0 2px;
-    color: #65657b;
-    background-color: #fdfdfd;
+    color: var(--border-color);
+    background-color: var(--text-color);
     line-height: 20px;
     pointer-events: none;
     transform-origin: 0 50%;
@@ -70,15 +70,11 @@ export default {
     transform: translateY(-20px) scale(0.75);
 }
 
-.base-input__input:not(:placeholder-shown) ~ .base-input__label {
-    color: #808097;
-}
-
 .base-input__input:focus ~ .base-input__label {
-    color: #7a92ef;
+    color: var(--primary-color);
 }
 
 .base-input__input:focus {
-    border: 1px solid #7a92ef;
+    border: 1px solid var(--primary-color);
 }
 </style>

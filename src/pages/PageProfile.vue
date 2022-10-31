@@ -1,36 +1,33 @@
 <template>
-<div class="profile">
-  <div class="card">
-    <div v-for="(item, key) in $store.state.auth.user" :key="key" class="card__item">
-      {{key}}: {{item}}
-    </div>
-    <BaseButton @click.prevent="handleLogout" value="log out"/>
+<BaseCard>
+  <div v-for="(item, key) in $store.state.profile.user" :key="key" class="user-item">
+    {{key}}: {{item}}
   </div>
-</div>
+  <BaseButton @click.prevent="handleLogout" value="log out"/>
+</BaseCard>
 </template>
   
 <script>
 import BaseButton from "@/components/BaseButton";
+import BaseCard from "@/components/BaseCard";
+import loggedInMixin from '@/mixins/loggedIn.mixin.js'
 
 export default {
   name: 'PageProfile',
+  mixins: [loggedInMixin],
   components: {
-    BaseButton
-  },
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    },
+    BaseButton,
+    BaseCard
   },
   async created() {
     if (!this.loggedIn) {
       this.$router.push('/login');
     }
-    await this.$store.dispatch('auth/setUser')
+    await this.$store.dispatch('profile/setUser')
   },
   methods: {
     async handleLogout() {
-      await this.$store.dispatch('auth/logout')
+      await this.$store.dispatch('profile/logout')
       this.$router.push('/login');
     }
   }
@@ -44,20 +41,8 @@ export default {
   width: 100vw;
   height: 100vh;
 }
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 320px;
-  height: 380px;
-  background-color: #fdfdfd;
-  border-radius: 6px;
-  box-shadow: 0 0 10px #7a92ef;
-}
-
-.card__item {
+.user-item {
   font-size: 18px;
-  color: #6d87ee;
+  color: var(--secondary-color);
 }
 </style>

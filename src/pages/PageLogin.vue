@@ -1,23 +1,29 @@
 <template>
-<div class="login">
-  <div class="card">
-    <BaseInput :value="form.email" @my-input="email => form.email = email" label="email" />
-    <BaseInput :value="form.password" @my-input="password => form.password = password" label="password" />
+<BaseCard>
+  <BaseInput :value="form.email" @my-input="email => form.email = email" label="email" />
+  <BaseInput :value="form.password" @my-input="password => form.password = password" label="password" />
 
-    <BaseButton @click.prevent="handleLogin" value="send"/>
-  </div>
-</div>
+  <BaseButton @click.prevent="handleLogin" value="send"/>
+
+  <BaseInfo />
+</BaseCard>
 </template>
   
 <script>
 import BaseInput from "@/components/BaseInput";
 import BaseButton from "@/components/BaseButton";
+import BaseCard from "@/components/BaseCard";
+import BaseInfo from "@/components/BaseInfo";
+import loggedInMixin from '@/mixins/loggedIn.mixin.js'
   
 export default {
   name: "PageLogin",
+  mixins: [loggedInMixin],
   components: {
     BaseInput,
-    BaseButton
+    BaseButton,
+    BaseCard,
+    BaseInfo
     },
   data() {
     return {
@@ -25,12 +31,9 @@ export default {
         email: '',
         password: ''
       },
+      emailExample: process.env.VUE_APP_USER_EMAIL,
+      passwordExample: process.env.VUE_APP_USER_PASSWORD,
     };
-  },
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    },
   },
   created() {
     if (this.loggedIn) {
@@ -39,7 +42,7 @@ export default {
   },
   methods: {
     async handleLogin() {
-      const result = await this.$store.dispatch('auth/login', this.form)
+      const result = await this.$store.dispatch('profile/login', this.form)
       if(result) {
         this.$router.push("/profile");
       }
@@ -47,31 +50,3 @@ export default {
   },
 };
 </script>
-  
-<style scoped>
-.login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-}
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 320px;
-  height: 380px;
-  background-color: #fdfdfd;
-  border-radius: 6px;
-  box-shadow: 0 0 10px #7a92ef;
-}
-
-.auth-form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-</style>

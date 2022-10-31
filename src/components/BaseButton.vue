@@ -18,8 +18,8 @@ export default {
     padding: 6px 12px;
     border: none;
     border-radius: 6px;
-    background-color: #7a92ef;
-    color: #fdfdfd;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     font-weight: 500;
     font-size: 15px;
     cursor: pointer;
@@ -27,7 +27,7 @@ export default {
 }
 
 .base-button:hover {
-  background-color: #6d87ee;
+  background-color: var(--secondary-color);
 }
 .base-button:active {
   transform: scale(0.975);

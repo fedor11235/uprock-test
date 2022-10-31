@@ -6,7 +6,7 @@ const initialState = loggedIn
   ? { status: { loggedIn: true } }
   : { status: { loggedIn: false } };
 
-export const auth = {
+export default {
   namespaced: true,
   state: initialState,
   mutations: {
