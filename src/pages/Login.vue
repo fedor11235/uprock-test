@@ -1,62 +1,50 @@
 <template>
-    <div class="login">
-      <div class="card">
-        <form class="auth-form">
-          <input class="auth-form__input" type="text" v-model="form.email" />
-          <input class="auth-form__input" type="text" v-model="form.password" />
+<div class="login">
+  <div class="card">
+    <BaseInput :value="form.email" @my-input="email => form.email = email" label="email" />
+    <BaseInput :value="form.password" @my-input="password => form.password = password" label="password" />
 
-          <input class="auth-form__submit" type="submit" @click.prevent="handleLogin" />
-        </form>
-      </div>
-    </div>
+    <BaseButton @click.prevent="handleLogin"/>
+  </div>
+</div>
 </template>
   
-  <script>
-  // import { Form, Field, ErrorMessage } from "vee-validate";
-  // import * as yup from "yup";
-  import authService from "@/services/auth.service";
+<script>
+import authService from "@/services/auth.service";
+import BaseInput from "@/components/BaseInput";
+import BaseButton from "@/components/BaseButton";
   
-  export default {
-    name: "PageLogin",
-    // components: {
-    //   Form,
-    //   Field,
-    //   ErrorMessage,
-    // },
-    data() {
-      // const schema = yup.object().shape({
-      //   username: yup.string().required("Username is required!"),
-      //   password: yup.string().required("Password is required!"),
-      // });
-  
-      return {
-        loading: false,
-        // message: "",
-        // schema,
-        form: {
-          email: '',
-          password: ''
-        },
-      };
+export default {
+  name: "Login",
+  components: {
+    BaseInput,
+    BaseButton
     },
-    computed: {
-      loggedIn() {
-        return this.$store.state.auth.status.loggedIn;
+  data() {
+    return {
+      form: {
+        email: '',
+        password: ''
       },
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     },
-    created() {
-      if (this.loggedIn) {
-        this.$router.push("/profile");
-      }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push("/profile");
+    }
+  },
+  methods: {
+    handleLogin() {
+      authService.login(this.form)
     },
-    methods: {
-      handleLogin() {
-        this.loading = true;
-        authService.login(form)
-      },
-    },
-  };
-  </script>
+  },
+};
+</script>
   
 <style scoped>
 .login {
@@ -73,8 +61,9 @@
   justify-content: center;
   width: 320px;
   height: 380px;
+  background-color: #fdfdfd;
   border-radius: 6px;
-  box-shadow: 0 0 10px #f1f1f1;
+  box-shadow: 0 0 10px #7a92ef;
 }
 
 .auth-form{
