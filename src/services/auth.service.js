@@ -3,21 +3,12 @@ import authApi from '@/api/auth.api';
 class AuthService {
   async login(payload) {
     try {
-      const user = await authApi.login(payload)
-      localStorage.setItem('user', JSON.stringify(user.data))
-      return user
+      const res = await authApi.login(payload)
+      if(res.status === 200) {
+        return true
+      }
     } catch (e) {
-      console.error('failed to login', e)
-    }
-  }
-
-  async register(payload) {
-    try {
-      const user = await authApi.login(payload)
-      localStorage.setItem('user', JSON.stringify(user.data))
-      return user
-    } catch (e) {
-      console.error('failed to register', e)
+      return false
     }
   }
 

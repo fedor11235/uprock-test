@@ -15,7 +15,7 @@ import BaseInput from "@/components/BaseInput";
 import BaseButton from "@/components/BaseButton";
   
 export default {
-  name: "Login",
+  name: "LoginPage",
   components: {
     BaseInput,
     BaseButton

@@ -3,14 +3,20 @@ import { rest } from 'msw'
 export const handlers = [
 
   rest.post('/login', (req, res, ctx) => {
-    console.log(req, 'testim msw')
-    sessionStorage.setItem('is-authenticated', 'true')
+    if(
+      req.body.email === process.env.VUE_APP_USER_EMAIL && 
+      req.body.password === process.env.VUE_APP_USER_PASSWORD
+      ) {
+      sessionStorage.setItem('is-authenticated', 'true')
+      return res(
+        ctx.status(200),
+      )
+    }
     return res(
-      ctx.status(200),
+      ctx.status(401),
     )
-  }),
 
-  rest.get('/register', null),
+  }),
 
   rest.get('/user', (req, res, ctx) => {
     const isAuthenticated = sessionStorage.getItem('is-authenticated')
@@ -24,9 +30,10 @@ export const handlers = [
     }
     return res(
       ctx.status(200),
-      // ctx.json({
-      //   username: 'admin',
-      // }),
+      ctx.json({
+        username: 'admin',
+        email: 'admin@admin.com',
+      }),
     )
   }),
 ]
