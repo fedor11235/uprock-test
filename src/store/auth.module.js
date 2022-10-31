@@ -1,61 +1,55 @@
 import AuthService from '../services/auth.service';
+import userService from '../services/user.service';
 
-const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user
-  ? { status: { loggedIn: true }, user }
-  : { status: { loggedIn: false }, user: null };
+const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+const initialState = loggedIn
+  ? { status: { loggedIn: true } }
+  : { status: { loggedIn: false } };
 
 export const auth = {
   namespaced: true,
   state: initialState,
-  actions: {
-    login({ commit }, user) {
-      return AuthService.login(user).then(
-        user => {
-          commit('loginSuccess', user);
-          return Promise.resolve(user);
-        },
-        error => {
-          commit('loginFailure');
-          return Promise.reject(error);
-        }
-      );
-    },
-    logout({ commit }) {
-      AuthService.logout();
-      commit('logout');
-    },
-    register({ commit }, user) {
-      return AuthService.register(user).then(
-        response => {
-          commit('registerSuccess');
-          return Promise.resolve(response.data);
-        },
-        error => {
-          commit('registerFailure');
-          return Promise.reject(error);
-        }
-      );
-    }
-  },
   mutations: {
-    loginSuccess(state, user) {
+    LOGIN_SUCCESS(state) {
       state.status.loggedIn = true;
+    },
+    USER_SUCCESS(state, user) {
       state.user = user;
     },
-    loginFailure(state) {
+    AUTHORIZATION_FAILURE(state) {
       state.status.loggedIn = false;
       state.user = null;
     },
-    logout(state) {
+    LOGOUT(state) {
       state.status.loggedIn = false;
       state.user = null;
-    },
-    registerSuccess(state) {
-      state.status.loggedIn = false;
-    },
-    registerFailure(state) {
-      state.status.loggedIn = false;
     }
+  },
+  actions: {
+    async login({ commit }, payload) {
+      const ifLogin = await AuthService.login(payload)
+      if(ifLogin) {
+        localStorage.setItem('loggedIn', true);
+        commit('LOGIN_SUCCESS')
+      } else {
+        localStorage.removeItem('loggedIn');
+        commit('AUTHORIZATION_FAILURE')
+      }
+      return ifLogin
+    },
+    async setUser({ commit }) {
+      const user = await userService.getUser()
+      if(user) {
+        commit('USER_SUCCESS', user)
+      } else {
+        localStorage.removeItem('loggedIn');
+        commit('AUTHORIZATION_FAILURE')
+      }
+    },
+    async logout({ commit }) {
+      await AuthService.logout();
+      localStorage.removeItem('loggedIn');
+      commit('LOGOUT');
+    },
   }
 };

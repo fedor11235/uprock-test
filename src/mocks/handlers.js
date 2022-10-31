@@ -1,7 +1,6 @@
 import { rest } from 'msw'
 
 export const handlers = [
-
   rest.post('/login', (req, res, ctx) => {
     if(
       req.body.email === process.env.VUE_APP_USER_EMAIL && 
@@ -16,6 +15,13 @@ export const handlers = [
       ctx.status(401),
     )
 
+  }),
+
+  rest.post('/logout', (req, res, ctx) => {
+    sessionStorage.removeItem('is-authenticated');
+    return res(
+      ctx.status(200),
+    )
   }),
 
   rest.get('/user', (req, res, ctx) => {
@@ -33,6 +39,8 @@ export const handlers = [
       ctx.json({
         username: 'admin',
         email: 'admin@admin.com',
+        name: 'Fedor',
+        surname: 'Avdeev'
       }),
     )
   }),

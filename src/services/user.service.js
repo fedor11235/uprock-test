@@ -1,11 +1,10 @@
-import authHeader from './auth-header';
-import uaerApi from '@/api/uaer.api';
+import userApi from '@/api/user.api';
 
 class UserService {
-  async getUserBoard() {
+  async getUser() {
     try {
-      const user =  await uaerApi.getUserBoard({ headers: authHeader() })
-      return user
+      const user =  await userApi.getUser()
+      return user.data
     } catch(e) {
       console.error('failed to user', e)
     }

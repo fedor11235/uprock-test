@@ -1,16 +1,16 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Login from "@/pages/Login.vue";
-const Profile = () => import("@/pages/Profile.vue")
+import PageLogin from "@/pages/PageLogin.vue";
+const PageProfile = () => import("@/pages/PageProfile.vue")
 
 const routes = [
   {
     path: "/login",
-    component: Login,
+    component: PageLogin,
   },
   {
     path: "/profile",
     name: "profile",
-    component: Profile,
+    component: PageProfile,
   }
 ];
 

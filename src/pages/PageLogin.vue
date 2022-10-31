@@ -4,18 +4,17 @@
     <BaseInput :value="form.email" @my-input="email => form.email = email" label="email" />
     <BaseInput :value="form.password" @my-input="password => form.password = password" label="password" />
 
-    <BaseButton @click.prevent="handleLogin"/>
+    <BaseButton @click.prevent="handleLogin" value="send"/>
   </div>
 </div>
 </template>
   
 <script>
-import authService from "@/services/auth.service";
 import BaseInput from "@/components/BaseInput";
 import BaseButton from "@/components/BaseButton";
   
 export default {
-  name: "LoginPage",
+  name: "PageLogin",
   components: {
     BaseInput,
     BaseButton
@@ -39,8 +38,11 @@ export default {
     }
   },
   methods: {
-    handleLogin() {
-      authService.login(this.form)
+    async handleLogin() {
+      const result = await this.$store.dispatch('auth/login', this.form)
+      if(result) {
+        this.$router.push("/profile");
+      }
     },
   },
 };

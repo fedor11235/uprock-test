@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 class UserApi {
-  getUserBoard(payload) {
-    return axios.get('/user', payload);
+  getUser() {
+    return axios.get('/user');
   }
 }
 

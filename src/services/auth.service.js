@@ -8,12 +8,19 @@ class AuthService {
         return true
       }
     } catch (e) {
-      return false
+      if(e.response.status === 401) {
+        return false
+      }
+      console.log('the request failed ', e)
     }
   }
 
-  logout() {
-    localStorage.removeItem('user');
+  async logout() {
+    try {
+      await authApi.logout()
+    } catch (e) {
+      console.log('the request failed ', e)
+    }
   }
 }
 

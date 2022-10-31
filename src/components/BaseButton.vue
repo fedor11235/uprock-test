@@ -1,9 +1,15 @@
 <template>
-<input class="base-button" type="submit" />
+<input class="base-button" type="submit" :value="value"/>
 </template>
 <script>
 export default {
     name: 'BaseButton',
+    props: {
+      value: {
+          type: String,
+          required: true
+      }
+  },
 }
 </script>
 <style scoped>
@@ -21,9 +27,9 @@ export default {
 }
 
 .base-button:hover {
-    background-color: #6d87ee;
-  }
+  background-color: #6d87ee;
+}
 .base-button:active {
-transform: scale(0.975);
+  transform: scale(0.975);
 }
 </style>
