@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { axiosInstance } from './common'
 
 class UserApi {
   getUser() {
-    return axios.get('/user');
+    return axiosInstance.get('/user');
   }
 }
 

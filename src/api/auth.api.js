@@ -1,11 +1,11 @@
-import axios from 'axios';
+import { axiosInstance } from './common'
 
 class AuthApi {
   login(payload) {
-    return axios.post('/login', payload)
+    return axiosInstance.post('/login', payload)
   }
   logout() {
-    return axios.post('/logout')
+    return axiosInstance.post('/logout')
   }
 }
 
