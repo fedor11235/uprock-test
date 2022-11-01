@@ -3,17 +3,17 @@
   <BaseInput :value="form.email" @my-input="email => form.email = email" label="email" />
   <BaseInput :value="form.password" @my-input="password => form.password = password" label="password" />
 
-  <BaseButton @click.prevent="handleLogin" value="send"/>
+  <BaseButton @click.prevent="handlerLogin" value="send"/>
 
   <BaseInfo />
 </BaseCard>
 </template>
   
 <script>
-import BaseInput from "@/components/BaseInput";
-import BaseButton from "@/components/BaseButton";
-import BaseCard from "@/components/BaseCard";
-import BaseInfo from "@/components/BaseInfo";
+import BaseInput from "@/components/BaseInput"
+import BaseButton from "@/components/BaseButton"
+import BaseCard from "@/components/BaseCard"
+import BaseInfo from "@/components/BaseInfo"
 import loggedInMixin from '@/mixins/loggedIn.mixin.js'
   
 export default {
@@ -32,21 +32,23 @@ export default {
         password: ''
       },
       emailExample: process.env.VUE_APP_USER_EMAIL,
-      passwordExample: process.env.VUE_APP_USER_PASSWORD,
-    };
+      passwordExample: process.env.VUE_APP_USER_PASSWORD
+    }
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.push("/profile")
     }
   },
   methods: {
-    async handleLogin() {
+    async handlerLogin() {
       const result = await this.$store.dispatch('profile/login', this.form)
       if(result) {
-        this.$router.push("/profile");
+        this.$router.push("/profile")
+      } else if (result===false) {
+        alert('The email address or password is incorrect.')
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

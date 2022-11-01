@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'BaseCard'
+  name: 'BaseCard'
 }
 </script>
 <style lang="scss" scoped>

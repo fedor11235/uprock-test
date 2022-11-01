@@ -3,13 +3,13 @@
 </template>
 <script>
 export default {
-    name: 'BaseButton',
-    props: {
-      value: {
-          type: String,
-          required: true
-      }
-  },
+  name: 'BaseButton',
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

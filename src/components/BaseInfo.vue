@@ -12,10 +12,10 @@ export default {
   data() {
     return {
       emailExample: process.env.VUE_APP_USER_EMAIL,
-      passwordExample: process.env.VUE_APP_USER_PASSWORD,
-    };
+      passwordExample: process.env.VUE_APP_USER_PASSWORD
+    }
   }
-};
+}
 </script>
   
 <style lang="scss" scoped>

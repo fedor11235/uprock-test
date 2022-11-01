@@ -8,32 +8,32 @@
 export default {
   name: 'BaseInput',
   props: {
-      label: {
-          type: String,
-          required: true
-      },
-      value: {
-          type: String,
-          required: true
-      }
+    label: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: String,
+      required: true
+    }
   },
   data() {
-      return {
-          valueData: ''
-      }
+    return {
+      valueData: ''
+    }
   },
   computed: {
-      name() {
-          return this.label.toLowerCase();
-      },
+    name() {
+      return this.label.toLowerCase()
+    }
   },
   mounted() {
-      this.valueData = this.valueProp
+    this.valueData = this.valueProp
   },
   methods: {
-      handlerInput(event) {
-          this.$emit('myInput', event.target.value);
-      }
+    handlerInput(event) {
+      this.$emit('myInput', event.target.value)
+    }
   }
 }
 </script>
