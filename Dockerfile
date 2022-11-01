@@ -6,11 +6,11 @@ WORKDIR /app
 COPY ./package*.json ./
 
 RUN npm install
-RUN npm install -g http-server
+RUN  npm install -g serve@13.0.4
 
 COPY . .
 
 RUN npm run build
-EXPOSE 8081
+EXPOSE 3000
 
-CMD ["http-server", "dist"]
+CMD ["serve", "-s", "dist"]
