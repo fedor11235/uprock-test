@@ -18,11 +18,11 @@ export default {
 };
 </script>
   
-<style scoped>
+<style lang="scss" scoped>
 
 .base-info {
   margin: 8px;
   font-size: 18px;
-  color: var(--secondary-color);
+  color: $secondary-color;
 }
 </style>

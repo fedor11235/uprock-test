@@ -37,44 +37,42 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .base-input {
-    position: relative;
-    margin: 6px;
-}
-.base-input__input {
+  position: relative;
+  margin: 6px;
+  &__input {
     border: 1px solid #8a96a3;
     border-radius: 6px;
     padding: 10px 16px;
     font-size: 16px;
     font-weight: 500;
     outline: 0;
-    color: var(--input-color);
-}
+    color: $input-color;
+    &:focus ~ .base-input__label,
+    &:not(:placeholder-shown) ~ .base-input__label {
+        transform: translateY(-20px) scale(0.75);
+    }
 
-.base-input__label {
+    &:focus ~ .base-input__label {
+        color: $primary-color;
+    }
+
+    &:focus {
+        border: 1px solid $primary-color;
+    }
+  }
+  &__label {
     position: absolute;
     top: 8px;
     left: 16px;
     padding: 0 2px;
-    color: var(--border-color);
-    background-color: var(--text-color);
+    color: $border-color;
+    background-color: $text-color;
     line-height: 20px;
     pointer-events: none;
     transform-origin: 0 50%;
     transition: transform 200ms, color 200ms;
-}
-
-.base-input__input:focus ~ .base-input__label,
-.base-input__input:not(:placeholder-shown) ~ .base-input__label {
-    transform: translateY(-20px) scale(0.75);
-}
-
-.base-input__input:focus ~ .base-input__label {
-    color: var(--primary-color);
-}
-
-.base-input__input:focus {
-    border: 1px solid var(--primary-color);
+  }
 }
 </style>

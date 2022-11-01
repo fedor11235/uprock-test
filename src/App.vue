@@ -16,7 +16,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss">
 #app {
   display: flex;
   align-items: center;
@@ -25,6 +25,6 @@ export default {
   height: 100vh;
 }
 body {
-  background-color: var(--primary-color);
+  background-color: $primary-color;
 }
 </style>

@@ -33,16 +33,9 @@ export default {
   }
 };
 </script>
-<style>
-.profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-}
+<style lang="scss" scoped>
 .user-item {
   font-size: 18px;
-  color: var(--secondary-color);
+  color: $secondary-color;
 }
 </style>

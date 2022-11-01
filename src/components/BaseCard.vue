@@ -8,7 +8,7 @@ export default {
     name: 'BaseCard'
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .base-card {
   display: flex;
   flex-direction: column;
@@ -16,8 +16,8 @@ export default {
   justify-content: center;
   width: 320px;
   height: 380px;
-  background-color: var(--text-color);
+  background-color: $text-color;
   border-radius: 6px;
-  box-shadow: 0 0 10px var(--primary-color);
+  box-shadow: 0 0 10px $primary-color;
 }
 </style>
