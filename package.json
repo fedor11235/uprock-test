@@ -47,6 +47,6 @@
     "not ie 11"
   ],
   "msw": {
-    "workerDirectory": "public"
+    "workerDirectory": "dist"
   }
 }

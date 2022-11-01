@@ -1,2 +1,4 @@
 import axios from 'axios'
-export const axiosInstance = axios.create()
+export const apiClient = axios.create({
+  baseURL: '/api'
+})
